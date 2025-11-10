@@ -1,6 +1,6 @@
 # Online Bookstore Management System
 
-This is a comprehensive database application system for an online bookstore, developed using **Java**, **JavaFX**, and **MySQL**. The system supports full CRUD (Create, Read, Update, Delete) operations for modules including books, orders, customers, suppliers, and more.
+This is a comprehensive database application system for an online bookstore, developed using **Java**, **JavaFX**, and **openGauss**. The system supports full CRUD (Create, Read, Update, Delete) operations for modules including books, orders, customers, suppliers, and more.
 
 ------
 
@@ -31,46 +31,44 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started w
 
 - **Operating System:** Windows / macOS / Linux
 - **Java:** JDK 11 or higher
-- **Database:** MySQL 8.x
+- **Database:** openGauss 5.x or compatible
 - **Libraries Required:**
-  - MySQL Connector/J (JDBC Driver)
+  - openGauss JDBC Driver
   - JavaFX SDK
 
 ------
 
-### 2. MySQL Configuration
+### 2. openGauss Configuration
 
-#### ✅ Download MySQL:
+#### ✅ Install openGauss:
 
-Go to [MySQL Community Downloads](https://dev.mysql.com/downloads/mysql/) to download MySQL Community Server.
+Download the community edition from the [openGauss official site](https://opengauss.org/en/download/) and follow the installation guide for your operating system.
 
-#### ✅ Set Root Password:
+#### ✅ Create Database Role & Schema:
 
-During installation, set the `root` user password (e.g., `123456`).
+During installation you can create a dedicated role (for example `gaussdb`) and set a secure password.
 
-#### ✅ Create Database:
-
-Use the SQL statements provided in the file `数据库初始化需要的sql语句.txt` to create the database and its tables. Just copy and run the content in a MySQL client like MySQL Workbench.
+Use the SQL statements provided in the file `数据库初始化需要的sql语句.txt` to create the database and its tables. Execute them with the `gsql` client or any PostgreSQL-compatible GUI.
 
 #### ✅ Configure Database Connection in Code:
 
 Open the file `DatabaseUtil.java` and update the following lines as needed:
 
 ```java
-private static final String DB_URL = "jdbc:mysql://localhost:3306/BookStoreDB"; // Database URL
-private static final String DB_USER = "root"; // Database username
-private static final String DB_PASSWORD = "123456"; // Database password
+private static final String DB_URL = "jdbc:opengauss://localhost:5432/BookStoreDB"; // Database URL
+private static final String DB_USER = "gaussdb"; // Database username
+private static final String DB_PASSWORD = "your_password"; // Database password
 ```
 
-> 🔁 If your MySQL is running on a non-default port, change `localhost:3306` to the correct one.
->  🔐 Replace `"123456"` with your actual MySQL password.
+> 🔁 If your openGauss instance is running on a non-default host or port, adjust `localhost:5432` accordingly.
+>  🔐 Replace `"your_password"` with the password assigned to the role you created above.
 
 ------
 
 ### 3. JDBC Driver Setup
 
-1. Download the latest **MySQL Connector/J** from [here](https://dev.mysql.com/downloads/connector/j/).
-2. Unzip the archive and locate the `mysql-connector-java-x.x.x.jar` file.
+1. Download the latest **openGauss JDBC Driver** from the [openGauss release page](https://opengauss.org/en/download/).
+2. Unzip the archive and locate the `opengauss-jdbc-x.x.x.jar` (or similarly named) file.
 3. Place the `.jar` file in your project’s `lib/` folder or add it via your IDE's library manager.
 
 ------
@@ -100,19 +98,19 @@ These configuration files should specify the JavaFX runtime modules and paths.
 
 - Add `%JAVA_HOME%\bin` to the system `Path`.
 
-#### ✅ MySQL
+#### ✅ openGauss
 
-- Add MySQL's bin directory to your system `Path`, for example:
+- Add the openGauss `bin` directory (where `gsql` resides) to your system `Path`, for example:
 
   ```
-  C:\Program Files\MySQL\MySQL Server 8.0\bin
+  C:\openGauss\bin
   ```
 
 ------
 
 ## ⚠️ Notes & Troubleshooting
 
-- Ensure **JDK**, **MySQL**, **JDBC Driver**, and **JavaFX SDK** versions are compatible.
+- Ensure **JDK**, **openGauss**, **JDBC Driver**, and **JavaFX SDK** versions are compatible.
 - Keep libraries up to date to prevent runtime issues.
 - If the GUI doesn’t display properly, double-check your JavaFX configuration and VM arguments in your launch settings.
 
@@ -124,7 +122,7 @@ These configuration files should specify the JavaFX runtime modules and paths.
 - 🛒 Order processing
 - 👤 Customer management
 - 🚚 Supplier records
-- 🔍 MySQL-based persistent data storage
+- 🔍 openGauss-based persistent data storage
 - 💻 JavaFX graphical user interface
 
 ------
